@@ -13,17 +13,14 @@ type Combinator struct {
 }
 
 // NewCombinator is the constructor for the combinator object
-func NewCombinator(charset []byte, start []byte) (*Combinator, error) {
+func NewCombinator(charset []byte) (*Combinator, error) {
 	if len(charset) < 1 {
 		return nil, errors.New("charset must have at least one character")
-	}
-	if len(start) < 1 {
-		return nil, errors.New("the starting point must be at least one character")
 	}
 	rand.Seed(time.Now().UnixNano())
 	return &Combinator{
 		charset:    charset,
-		currentKey: start,
+		currentKey: []byte{charset[0]},
 	}, nil
 }
 
@@ -33,8 +30,9 @@ func (c *Combinator) GetKey() []byte {
 }
 
 // SetKey sets the key to a predefined value
-func (c *Combinator) SetKey(key []byte) {
+func (c *Combinator) SetKey(key []byte) []byte {
 	c.currentKey = key
+	return c.currentKey
 }
 
 // RandKey sets a random key of length 'size' and returns it
