@@ -1,6 +1,10 @@
 package combinator
 
-import "errors"
+import (
+	"errors"
+	"math/rand"
+	"time"
+)
 
 // Combinator represents our key generator
 type Combinator struct {
@@ -16,6 +20,7 @@ func NewCombinator(charset []byte, start []byte) (*Combinator, error) {
 	if len(start) < 1 {
 		return nil, errors.New("the starting point must be at least one character")
 	}
+	rand.Seed(time.Now().UnixNano())
 	return &Combinator{
 		charset:    charset,
 		currentKey: start,
@@ -30,6 +35,15 @@ func (c *Combinator) GetKey() []byte {
 // SetKey sets the key to a predefined value
 func (c *Combinator) SetKey(key []byte) {
 	c.currentKey = key
+}
+
+// RandKey sets a random key of length 'size' and returns it
+func (c *Combinator) RandKey(size int) []byte {
+	c.currentKey = []byte{}
+	for i := 0; i < size; i++ {
+		c.currentKey = append(c.currentKey, c.charset[rand.Intn(len(c.charset))])
+	}
+	return c.currentKey
 }
 
 // NextRight advances the key by incrementing from the right of the current key
