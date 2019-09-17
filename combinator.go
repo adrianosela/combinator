@@ -41,9 +41,8 @@ func (c *Combinator) NextRight() []byte {
 		}
 		if pos == len(c.currentKey)-1 {
 			c.currentKey = append([]byte{'A'}, c.currentKey...)
-		} else {
-			c.currentKey[pos] = 'A'
 		}
+		c.currentKey[pos] = 'A'
 	}
 	return c.currentKey
 }
@@ -57,9 +56,8 @@ func (c *Combinator) NextLeft() []byte {
 		}
 		if pos == 0 {
 			c.currentKey = append(c.currentKey, 'A')
-		} else {
-			c.currentKey[pos] = 'A'
 		}
+		c.currentKey[pos] = 'A'
 	}
 	return c.currentKey
 }
