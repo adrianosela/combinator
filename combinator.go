@@ -22,6 +22,11 @@ func NewCombinator(charset []byte, start []byte) (*Combinator, error) {
 	}, nil
 }
 
+// GetKey returns the current key in the combinator
+func (c *Combinator) GetKey() []byte {
+	return c.currentKey
+}
+
 // SetKey sets the key to a predefined value
 func (c *Combinator) SetKey(key []byte) {
 	c.currentKey = key
