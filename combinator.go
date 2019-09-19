@@ -56,8 +56,8 @@ func (c *Combinator) RandPerm(size int) []byte {
 		if _, ok := used[c]; !ok {
 			perm = append(perm, c)
 			used[c] = true
+			elems++
 		}
-		elems++
 	}
 
 	return perm
