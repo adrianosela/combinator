@@ -44,6 +44,25 @@ func (c *Combinator) RandKey(size int) []byte {
 	return c.currentKey
 }
 
+// RandPerm is a sad and inefficient way of getting a random permutation
+func (c *Combinator) RandPerm(size int) []byte {
+	perm := []byte{}
+
+	used := make(map[byte]bool)
+
+	elems := 0
+	for elems < size {
+		c := c.charset[rand.Intn(len(c.charset))]
+		if _, ok := used[c]; !ok {
+			perm = append(perm, c)
+			used[c] = true
+		}
+		elems++
+	}
+
+	return perm
+}
+
 // NextRight advances the key by incrementing from the right of the current key
 func (c *Combinator) NextRight() []byte {
 	for pos := 0; pos < len(c.currentKey); pos++ {
