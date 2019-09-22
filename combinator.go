@@ -6,12 +6,6 @@ import (
 	"time"
 )
 
-// Combinator represents our key generator
-type Combinator struct {
-	charset    []byte
-	currentKey []byte
-}
-
 // AlphanumericCharset represents a full alphanumeric charset
 var AlphanumericCharset = []byte{
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
@@ -21,6 +15,12 @@ var AlphanumericCharset = []byte{
 	'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
 	'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7',
 	'8', '9',
+}
+
+// Combinator represents our key generator
+type Combinator struct {
+	charset    []byte
+	currentKey []byte
 }
 
 // NewCombinator is the constructor for the combinator object
